@@ -64,7 +64,7 @@ def search():
 	return render_template('search.html', title = 'Search', users= users, form = form)
 
 
-@app.route('/delivery', methods = ['POST'])
+@app.route('/delivery', methods = ['GET', 'POST'])
 def delivery():
 	name = "test"
 	delivery = "test"
@@ -73,13 +73,12 @@ def delivery():
 		db.create_all()
 		delivery = form.text.data
 		name = form.name.data
-		text1 = models.User(nickname= delivery, id= name)
+		text1 = models.User(nickname= delivery, id=name)
 		db.session.add(text1)
 		db.session.commit()
-		deliv = models.User.query.all()
-		session ['del']= deliv
-		dels = session.get('del')
-		print (dels)
+		deliv = models.User.query.filter_by(id=name).first()
+		session ['del']= form.text.data #deliv
+		print (delivery)
 		return render_template('delivery.html', form = form,text1=text1,delivery=delivery,name=name,deliv=deliv)
 	else:
 		return render_template('delivery.html', form=form)
