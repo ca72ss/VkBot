@@ -1,0 +1,35 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+          <div class="col-sm-3">
+          </div>
+          <div class="col-sm-3">
+              <h1>Sign In</h1>
+<form action="/login" method="post" name="login">
+    {{form.hidden_tag()}}
+    <p>
+        Please enter your Login:<br>
+        {{form.login(size=80)}}<br>
+        {% for error in form.errors.login %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+    </p>
+        <p>
+        Please enter your Password:<br>
+        {{form.password(size=80)}}<br>
+        {% for error in form.errors.password %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+    </p>
+    <p><input type="submit" value="Sign In"></p>
+</form>
+           </div>
+          <div class="col-sm-3">
+         </div>
+        </div>
+     </div>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+{% block content %}
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-3">
+          </div>
+          <div class="col-sm-3">
+              <form action="/delivery" method="post" name="delivery">
+                      {{form.hidden_tag()}}
+                        Please enter your Delivery:<br>
+                        {{form.text(size=800)}}<br>
+                        Please enter your Name for Delivery:<br>
+                        {{form.name(size=25)}}<br>
+                      <p><input type="submit" value="Записать"></p>
+              </form>
+           </div>
+          <div class="col-sm-3">
+              <h1>{{name}}</h1>
+               <h3>{{session ['del']}}</h3>
+			<div class="container">
+
+			</div>
+          </div>
+           <div class="col-sm-3">
+          </div>
+        </div>
+      </div>
+      </body>
+      </html>
+{% endblock %}

@@ -1,0 +1,75 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+{% block content %}
+     <div class="container">
+        <div class="row">
+          <div class="col-sm-3">
+                           <div class="searchForm">
+    <form action="" method="post" name="filter" class="search">
+    {{form.hidden_tag()}}
+    <div class="field">
+        Please enter city:
+        {{form.city(size=25)}}<br>
+    </div>
+    <div class="field">
+        Please enter age from:
+        {{form.age_from(size=25)}}
+    </div>
+    <div class="field">
+        Please enter age to:
+        {{form.age_to(size=25)}}
+    </div>
+     <div class="field">
+        Please enter school year:
+        {{form.school_year(size=25)}}
+    </div>
+     <div class="field">
+        Please enter school:
+        {{form.school(size=25)}}
+    </div>
+    <div class="button"><input type="submit" value="Search"></div>
+	</form>
+</div>
+          </div>
+          <div class="col-sm-3">
+
+           </div>
+          <div class="col-sm-3">
+         </div>
+        </div>
+     </div>
+
+      <div class="container">
+      	{% for u in users %}
+        <div class="row">
+          <div class="col-sm-3">
+            <h3 class = "photo"> <img src={{u['photo_100']}}></h3>
+          </div>
+          <div class="col-sm-3">
+            <h3>{{u['first_name']}} {{u['last_name']}}</h3>
+           </div>
+          <div class="col-sm-3">
+			<div class="container">
+			  <h2></h2>
+			 {% if u['can_write_private_message'] == 1 %}
+			  <button class="sendM", id = "{{u['uid']}}">Отправить сообщение </button>
+                {% elif u['can_send_friend_request'] == 1 %}
+                <button class="sendM", id = "{{u['uid']}}"> Добавить в друзья </button>
+                {% else %}
+                     <div> Отказано в доступе</div>
+                {% endif %}
+			</div>
+          </div>
+           <div class="col-sm-3">       
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+<script>
+     $('.sendM').click(function(){
+     id_user=($(this).attr('id'));
+     $.get( "/message",{id:id_user})})
+</script>
+      </body>
+      </html>
+{% endblock %}

@@ -1,0 +1,17 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Filters</h1>
+<form action="/filter" method="post" name="filter">
+    {{form.hidden_tag()}}
+    <p>
+        Please enter city:<br>
+        {{form.city(size=80)}}<br>
+        {% for error in form.errors.login %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+    </p>
+    <p><input type="submit" value="Sign In"></p>
+</form>
+{% endblock %}
